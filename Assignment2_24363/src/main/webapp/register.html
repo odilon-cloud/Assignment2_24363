@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+    <!-- Language Dropdown -->
+    <div class="language-dropdown">
+        <label for="language-select">Select Language:</label>
+        <select id="language-select" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="rw">Kinyarwanda</option>
+            <option value="fr">French</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <div class="signup-box">
+            <h2 id="register-label">REGISTER</h2>
+            <form id="signup-form" onsubmit="return validateForm()" action="./register" method="post">
+                <input type="text" class="field" placeholder="First Name" id="first-name">
+                <input type="text" class="field" placeholder="Last Name" id="last-name">
+                <input type="text" class="field" placeholder="Your Email" id="email" name="email">
+
+                <input type="text" class="field" placeholder="Phone Number" id="phone">
+                <input type="text" class="field" placeholder="Address" id="address">
+                <input type="date" class="field" placeholder="Date of Birth" id="dob">
+                <div class="horizontal">
+                    <label for="male" id="male-label">Male</label> 
+                    <input type="radio" id="male" name="gender" value="male"> 
+                    <label for="female" id="female-label">Female</label> 
+                    <input type="radio" id="female" name="gender" value="female">
+                </div>
+                
+                <div class="fileUploader">
+                    <p id="passport-label">PASSPORT PHOTO</p>
+                    <input type="file" class="field" id="profile-picture" accept="image/*" onchange="previewImage(this)">
+                    <img id="image-preview" src="#" alt="Profile Picture Preview" style="display: none; max-width: 200px; max-height: 200px;">
+                    <p id="certificate-label">SECONDARY CERTIFICATE</p>
+                    <input type="file" class="field" id="profile-picture" accept="image/*" onchange="previewImage(this)">
+                    <img id="image-preview" src="#" alt="Profile Picture Preview" style="display: none; max-width: 200px; max-height: 200px;">
+                </div>
+                
+              
+                <button type="submit" class="btn" id="register-button">REGISTER</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+      
+        function translateTo(language) {
+            var translations = {
+                "en": {
+                    "register-label": "REGISTER",
+                    "first-name": "First Name",
+                    "last-name": "Last Name",
+                    "email": "Your Email",
+                    "phone": "Phone Number",
+                    "address": "Address",
+                    "dob": "Date of Birth",
+                    "male-label": "Male",
+                    "female-label": "Female",
+                    "passport-label": "PASSPORT PHOTO",
+                    "certificate-label": "SECONDARY CERTIFICATE",
+                    "terms-text": "I agree to the terms and conditions",
+                    "register-button": "REGISTER",
+                    
+                },
+                "rw": {
+                    "register-label": "KWIYANDIKISHYA",
+                    "first-name": "izina ry'idini",
+                    "last-name": "izina ry' ababyeyi",
+                    "email": "Imeyiri yawe",
+                    "phone": "Nimero ya telefoni",
+                    "address": "Aho Utuye",
+                    "dob": "Itariki y'amavuko",
+                    "male-label": "Umugabo",
+                    "female-label": "Umugore",
+                    "passport-label": "IFOYOTO YA PASIPORO",
+                    "certificate-label": "IFOYOTO Y'IGITONDI CY'IMIGENGE",
+                    "terms-text": "amabwiriza n'amategeko arubahizwa",
+                    "register-button": "GUFUNGURA",
+                    
+                },
+                "fr": {
+                    "register-label": "INSCRIPTION",
+                    "first-name": "Prenom",
+                    "last-name": "Nom de famille",
+                    "email": "Votre adresse e-mail",
+                    "phone": "Numero de telephone",
+                    "address": "Adresse",
+                    "dob": "Date de naissance",
+                    "male-label": "Homme",
+                    "female-label": "Femme",
+                    "passport-label": "PHOTO DE PASSEPORT",
+                    "certificate-label": "CERTIFICAT SECONDAIRE",
+                    "terms-text": "J'accepte les termes et conditions",
+                    "register-button": "INSCRIPTION",
+                    
+                }
+            };
+
+            var elementsToTranslate = Object.keys(translations[language]);
+
+            for (var i = 0; i < elementsToTranslate.length; i++) {
+                var elementId = elementsToTranslate[i];
+                var translation = translations[language][elementId];
+                var element = document.getElementById(elementId);
+                if (element) {
+                    if (element.tagName === 'INPUT' && element.getAttribute('type') === 'text') {
+                        element.placeholder = translation; 
+                    } else {
+                        element.textContent = translation;
+                    }
+                }
+            }
+        }
+
+       
+        function changeLanguage() {
+            var select = document.getElementById("language-select");
+            var selectedLanguage = select.value;
+
+            
+            translateTo(selectedLanguage);
+        }
+
+        
+        var defaultLanguage = "en";
+        var languageSelect = document.getElementById("language-select");
+        languageSelect.value = defaultLanguage;
+        translateTo(defaultLanguage);
+
+        function validateForm() {
+            var emailInput = document.getElementById("email");
+            var email = emailInput.value;
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                emailInput.focus();
+                return false;
+            }
+
+            // Validation for phone number length (10 digits)
+            var phoneInput = document.getElementById("phone");
+            var phoneNumber = phoneInput.value;
+            if (phoneNumber.length !== 10 || !/^\d+$/.test(phoneNumber)) {
+                alert("Please enter a 10-digit valid phone number.");
+                phoneInput.focus();
+                return false;
+            }
+	
+        }
+
+        function previewImage(input) {
+            var preview = document.getElementById("image-preview");
+            var file = input.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "#";
+                preview.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

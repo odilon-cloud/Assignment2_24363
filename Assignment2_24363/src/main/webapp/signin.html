@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+<div class="container">
+    <div class="signin-box">
+        <h2>Sign In</h2>
+        <form id="signin-form" onsubmit="return validateForm()" action="./signin" method="post">
+            <input type="email" class="field" placeholder="Your Email" id="email" name="email">
+            <input type="password" class="field" placeholder="Password" id="password" name="password">
+            <button type="submit" class="btn">Sign In</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html" class="signup-link">Sign Up</a></p>
+        <p><a href="forgot.html" class="forgot-password-link">Forgot Password?</a></p>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+  
+        if (email === "" || password === "") {
+            alert("Please fill in both email and password fields.");
+            return false;
+        }
+
+   
+        return true;
+    }
+</script>
+</body>
+</html>

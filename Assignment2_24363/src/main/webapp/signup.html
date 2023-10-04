@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <div class="signup-box">
+            <h2>Sign Up</h2>
+            <form id="signup-form" onsubmit="return validateForm()" action="./signin.html">
+                <input type="text" class="field" placeholder="First Name" id="first-name">
+                <input type="text" class="field" placeholder="Last Name" id="last-name">
+                <input type="email" class="field" placeholder="Your Email" id="email">
+                <input type="tel" class="field" placeholder="Phone Number" id="phone">
+                <input type="text" class="field" placeholder="Address" id="address">
+                <input type="date" class="field" placeholder="Date of Birth" id="dob">
+                <div class="horizontal">
+                    <label for="male">Male</label> 
+                    <input type="radio" id="male" name="gender" value="male"> 
+                    <label for="female">Female</label> 
+                    <input type="radio" id="female" name="gender" value="female">
+                </div>
+                <input type="password" class="field" placeholder="Password" id="password">
+                <input type="password" class="field" placeholder="Confirm Password" id="confirm-password">
+                <div>
+                    I agree to the terms and conditions
+                    <input type="checkbox" class="field" name="Terms and Conditions" id="terms">
+                </div>
+                    <button type="submit" class="btn">Sign up</button>
+                <p>Already have an account? <a href="signin.html" class="signin-link">Sign In</a></p> 
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Get form input values
+            var firstName = document.getElementById("first-name").value;
+            var lastName = document.getElementById("last-name").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var address = document.getElementById("address").value;
+            var dob = document.getElementById("dob").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm-password").value;
+            var terms = document.getElementById("terms").checked;
+
+            // Regular expressions for validation
+            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            var phoneRegex = /^\+250\d{9}$/;
+
+            // Check if all fields are filled
+            if (firstName === "" || lastName === "" || email === "" || phone === "" || address === "" || dob === "" || password === "" || confirmPassword === "" || !terms) {
+                alert("All fields are required.");
+                return false;
+            }
+
+            // Check email format
+            if (!emailRegex.test(email)) {
+                alert("Invalid email format.");
+                return false;
+            }
+
+            // Check phone number format
+            if (!phoneRegex.test(phone)) {
+                alert("Invalid phone number format. Please use +250********* format.");
+                return false;
+            }
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+
+            // All validations passed
+            return true;
+
+        }
+    </script>
+</body>
+</html>

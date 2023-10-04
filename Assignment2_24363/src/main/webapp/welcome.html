@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Welcome Page</title>
+    <style>
+      /* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    background-image: url('welcome.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+/* Style the navbar */
+.navbar {
+    background-color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex; 
+    align-items: center; 
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links li:last-child {
+    margin-right: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Style the welcome section */
+.welcome {
+    text-align: center;
+    padding: 100px 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.welcome h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.welcome p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Style the footer */
+footer {
+    background-color: #333;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="register.html" class="logo">Welcome click to</a>
+                <ul class="nav-links">
+					<li><a href="register.html">REGISTER</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <section class="welcome">
+        <div class="container">
+             <h1>Welcome to Our Website <span id="userName"></span></h1>
+        
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 odilon. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // JavaScript code to retrieve and display the user's name from the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const userName = urlParams.get('userName');
+
+        if (userName) {
+            document.getElementById('userName').textContent = userName;
+        }
+    </script>
+</body>
+</html>
